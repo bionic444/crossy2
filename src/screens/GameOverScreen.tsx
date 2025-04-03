@@ -15,41 +15,6 @@ import AudioManager from "@/AudioManager";
 import Characters from "@/Characters";
 import Images from "@/Images";
 
-// import { setGameState } from '../src/actions/game';
-
-//TODO: Make this dynamic
-const banner = [
-  {
-    color: "#3640eb",
-    title: "Get Updates Subscribe Now",
-    button: {
-      onPress: (_) => {
-        Alert.alert(
-          "Subscribe to our mailing list",
-          "Join our mailing list and discover the latest news from Expo and Evan Bacon.\n\n Read our privacy policy on https://github.com/EvanBacon/Expo-Crossy-Road/privacy.md",
-          [
-            { text: "Cancel", onPress: () => console.log("Cancel Pressed!") },
-            { text: "OK", onPress: () => console.log("OK Pressed!") },
-          ],
-          {
-            cancelable: false,
-          }
-        );
-      },
-      source: Images.button.mail,
-      style: { aspectRatio: 1.85, height: 40 },
-    },
-  },
-  {
-    color: "#368FEB",
-    title: "Free Gift in 2h 51m",
-  },
-  {
-    color: "#36D6EB",
-    title: "44 Coins To Go",
-  },
-];
-
 // const AnimatedBanner = Animated.createAnimatedComponent(Banner);
 
 function GameOver({ ...props }) {
@@ -58,6 +23,21 @@ function GameOver({ ...props }) {
   const [characters, setCharacters] = React.useState(
     Object.keys(Characters).map((val) => Characters[val])
   );
+
+  
+  const finalScore = props.score;
+  const banner = [
+    {
+      color: "#FF0000",
+      title: "You Died!",
+    },
+    {
+      color: "#36D6EB",
+      title: finalScore + " Score!",
+    },
+  ];
+
+  
   const [animations, setAnimations] = React.useState(
     banner.map((val) => new Animated.Value(0))
   );
