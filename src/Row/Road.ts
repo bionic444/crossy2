@@ -90,7 +90,7 @@ export default class Road extends Object3D {
 
     console.log(dt);
     // Scale movement speed based on delta time (normalized to 30 FPS)
-    const movement = car.speed * Math.min(dt, 0.1) * 30;
+    const movement = car.speed * dt * 30;
 
     car.mesh.position.x += movement;
 
