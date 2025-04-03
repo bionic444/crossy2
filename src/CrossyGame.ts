@@ -152,8 +152,8 @@ export class CrossyRenderer extends Renderer {
     this.__gl = props.gl;
     this.setShadowsEnabled(useShadows);
 
-    // this.toneMapping = THREE.NoToneMapping; // Or experiment with other mappings like LinearToneMapping
-    // this.toneMappingExposure = 1; // Increase if the scene is too dim
+    this.toneMapping = THREE.NoToneMapping; // Or experiment with other mappings like LinearToneMapping
+    this.toneMappingExposure = 1; // Increase if the scene is too dim
   }
 
   setShadowsEnabled(enabled) {

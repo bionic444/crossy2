@@ -88,20 +88,23 @@ export default class Road extends Object3D {
     const { hitBy } = player;
     const offset = 11;
 
-    car.mesh.position.x += car.speed;
+    // Scale movement speed based on delta time (normalized to 60 FPS)
+    const movement = car.speed * Math.min(dt, 0.1) * 60;
+
+    car.mesh.position.x += movement;
 
     if (car.mesh.position.x > offset && car.speed > 0) {
-      car.mesh.position.x = -offset;
-      if (car === hitBy) {
-        player.hitBy = null;
-      }
+        car.mesh.position.x = -offset;
+        if (car === hitBy) {
+            player.hitBy = null;
+        }
     } else if (car.mesh.position.x < -offset && car.speed < 0) {
-      car.mesh.position.x = offset;
-      if (car === hitBy) {
-        player.hitBy = null;
-      }
+        car.mesh.position.x = offset;
+        if (car === hitBy) {
+            player.hitBy = null;
+        }
     } else {
-      this.shouldCheckCollision({ player, car });
+        this.shouldCheckCollision({ player, car });
     }
   };
 

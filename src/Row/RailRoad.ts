@@ -82,26 +82,29 @@ export default class RailRoad extends Object3D {
     const { train } = this;
     const offset = 22 * 5;
 
-    train.mesh.position.x += train.speed;
+    // Scale movement speed based on delta time
+    const movement = train.speed * Math.min(dt, 0.1) * 60; // Normalize to 60 FPS
+
+    train.mesh.position.x += movement;
 
     if (train.mesh.position.x > offset && train.speed > 0) {
-      train.mesh.position.x = -offset;
-      this.startRingingLight();
-      AudioManager.playAsync(AudioManager.sounds.train.move["0"]);
-      if (train === hitByTrain) {
-        player.hitByTrain = null;
-      }
+        train.mesh.position.x = -offset;
+        this.startRingingLight();
+        AudioManager.playAsync(AudioManager.sounds.train.move["0"]);
+        if (train === hitByTrain) {
+            player.hitByTrain = null;
+        }
     } else if (train.mesh.position.x < -offset && train.speed < 0) {
-      train.mesh.position.x = offset;
-      this.startRingingLight();
-      AudioManager.playAsync(AudioManager.sounds.train.move["0"]);
-      if (train === hitByTrain) {
-        player.hitByTrain = null;
-      }
+        train.mesh.position.x = offset;
+        this.startRingingLight();
+        AudioManager.playAsync(AudioManager.sounds.train.move["0"]);
+        if (train === hitByTrain) {
+            player.hitByTrain = null;
+        }
     } else if (!moving) {
-      this.trainShouldCheckCollision({ player });
+        this.trainShouldCheckCollision({ player });
     }
-  };
+};
 
   trainShouldCheckCollision = ({ player }) => {
     const { train } = this;
