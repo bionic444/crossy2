@@ -11,14 +11,18 @@
     "deploy:web": "eas deploy"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.26.9",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-picker/picker": "2.9.0",
     "@tweenjs/tween.js": "^17.2.0",
     "expo": "^52.0.25",
     "expo-asset": "~11.0.2",
     "expo-av": "~15.0.2",
+    "expo-constants": "^17.0.8",
+    "expo-file-system": "^18.0.12",
     "expo-gl": "~15.0.3",
     "expo-linking": "~7.0.4",
+    "expo-modules-core": "^2.2.3",
     "expo-router": "~4.0.16",
     "expo-sharing": "~13.0.1",
     "expo-status-bar": "~2.0.1",
@@ -28,8 +32,9 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.6",
     "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "^4.10.0",
     "react-native-web": "~0.19.10",
-    "three": "0.145.0"
+    "three": "^0.175.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
