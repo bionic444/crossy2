@@ -178,11 +178,28 @@ export default class Engine {
   }
 
   unpause() {
+    let lastDelta = performance.now();
+    let lastTime = 0;
+
+    const targetFPS = 30; // Lower FPS for CPU-only rendering
+    const frameDuration = 1000 / targetFPS;
+
     const render = () => {
       this.raf = requestAnimationFrame(render);
-      const time = Date.now();
-      this.tick(time);
-      this.renderer.render(this.scene, this.camera);
+      const time = performance.now();
+      const delta = (time - lastDelta) / 1000;
+
+      lastDelta = time;
+
+      this.tick(delta);
+
+      this.renderer.setAnimationLoop((time) => {
+        if (time - lastTime < frameDuration) return;
+        lastTime = time;
+        
+        this.renderer.render(this.scene, this.camera);
+      });
+    
 
       // NOTE: At the end of each frame, notify `Expo.GLView` with the below
       this.renderer.__gl.endFrameEXP();

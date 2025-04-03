@@ -83,7 +83,7 @@ export default class RailRoad extends Object3D {
     const offset = 22 * 5;
 
     // Scale movement speed based on delta time
-    const movement = train.speed * Math.min(dt, 0.1) * 60; // Normalize to 60 FPS
+    const movement = train.speed * Math.min(dt, 0.1) * 30; // Normalize to 30 FPS
 
     train.mesh.position.x += movement;
 
