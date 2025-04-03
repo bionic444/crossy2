@@ -187,8 +187,6 @@ class Settings extends Component {
             ))}
           </View>
         </View>
-
-        {/* <Footer /> */}
       </View>
     );
   }

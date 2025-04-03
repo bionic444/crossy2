@@ -11,7 +11,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Hand from "@/components/HandCTA";
-import Footer from "@/components/Home/Footer";
 import GameContext from "@/context/GameContext";
 
 let hasShownTitle = false;
@@ -117,14 +116,6 @@ function Screen(props) {
           <View style={{ height: 64, marginBottom: 48, alignItems: "center" }}>
             {!__DEV__ && <Hand style={{ width: 36 }} />}
           </View>
-          <Footer
-            onCharacterSelect={() => {
-              // TODO(Bacon): Create a character select page
-            }}
-            onShop={() => {}}
-            onMultiplayer={() => {}}
-            onCamera={() => {}}
-          />
         </View>
       </TouchableOpacity>
     </View>
