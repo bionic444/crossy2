@@ -14,6 +14,8 @@ export default {
     social: require('../assets/images/buttons/social.png'),
     random: require('../assets/images/buttons/random.png'),
     mail: require('../assets/images/buttons/mail.png'),
+    exit: require('../assets/images/buttons/exit.png'),
+    submit: require('../assets/images/buttons/submit.png'),
 
     alerts: require('../assets/images/buttons/alerts.png'),
     conserve_battery: require('../assets/images/buttons/conserve_battery.png'),
