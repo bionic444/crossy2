@@ -16,7 +16,7 @@ import Engine from "@/GameEngine";
 import State from "@/state";
 import GameOverScreen from "@/screens/GameOverScreen";
 import HomeScreen from "@/screens/HomeScreen";
-import SettingsScreen from "@/screens/SettingsScreen";
+import UserInformationScreen from "@/screens/UserInformationScreen";
 import GameContext from "@/context/GameContext";
 
 const DEBUG_CAMERA_CONTROLS = false;
@@ -246,7 +246,7 @@ class Game extends Component {
   renderSettingsScreen() {
     return (
       <View style={StyleSheet.absoluteFillObject}>
-        <SettingsScreen goBack={() => this.setState({ showSettings: false })} />
+        <UserInformationScreen goBack={() => this.setState({ showSettings: false })} />
       </View>
     );
   }

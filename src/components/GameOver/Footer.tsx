@@ -36,10 +36,10 @@ export default function Footer({
       />
       <Button
         onPress={() => {
-          console.log("Game Center"); //TODO: Add GC
+          showSettings()
         }}
         imageStyle={[styles.button, { aspectRatio: 1.25 }]}
-        source={Images.button.rank}
+        source={Images.button.settings}
       />
     </View>
   );
