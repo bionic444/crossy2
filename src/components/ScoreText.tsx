@@ -34,6 +34,8 @@ export default function Score({ gameOver, score, ...props }) {
         { top: Math.max(top, 16), left: Math.max(left, 8) },
       ]}
     >
+      <Text style={[styles.score, textShadow]}>Wallet: None</Text>
+      <Text style={[styles.score, textShadow]}>Playing As: User1234</Text>
       <Text style={[styles.score, textShadow]}>{score}</Text>
       {highscore > 0 && (
         <Text style={[styles.highscore, textShadowHighscore]}>
