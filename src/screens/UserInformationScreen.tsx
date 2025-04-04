@@ -160,7 +160,7 @@ class Settings extends Component {
                 placeholder="Type here..."
                 placeholderTextColor="#ccc"
               />
-              <View style={{ flexDirection: "row", marginTop: 12 }}>
+              <View style={{ flexDirection: "row", marginTop: 16 }}>
                 <Button
                   source={Images.button.back}
                   imageStyle={{ width: 40, height: 32 }}
@@ -221,18 +221,18 @@ const styles = StyleSheet.create({
   inputBox: {
     position: "absolute",
     top: "30%",
-    left: "10%",
-    right: "10%",
+    width: 400, // Less wide
+    minHeight: 300, // Taller box
     backgroundColor: "rgba(255,255,255,0.95)",
-    borderRadius: 10,
-    padding: 16,
+    borderRadius: 12,
+    padding: 20,
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6,
     zIndex: 10,
   },
   textInput: {
@@ -240,12 +240,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     padding: 8,
-    width: 220,
+    width: "100%",
     fontSize: 16,
     fontFamily: "retro",
     backgroundColor: "#fff",
     color: "#000",
-    marginTop: 8,
+    marginTop: 10,
   },
   inputLabel: {
     fontFamily: "retro",
