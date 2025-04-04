@@ -43,7 +43,7 @@ function GameOver({ ...props }) {
   );
 
   const dismiss = () => {
-    // props.navigation.goBack();
+    //props.navigation.goBack();
     props.onRestart();
   };
 
@@ -60,13 +60,6 @@ function GameOver({ ...props }) {
 
       const playBannerSound = async () => {
         await AudioManager.playAsync(AudioManager.sounds.banner);
-        // const soundObject = new Audio.Sound();
-        // try {
-        //   await soundObject.loadAsync(AudioFiles.banner);
-        //   await soundObject.playAsync();
-        // } catch (error) {
-        //   console.warn('sound error', { error });
-        // }
       };
       playBannerSound();
       setTimeout(() => playBannerSound(), 300);
@@ -99,7 +92,6 @@ function GameOver({ ...props }) {
   };
 
   const select = () => {
-    // props.setCharacter(characters[currentIndex]);
     dismiss();
   };
 

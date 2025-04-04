@@ -175,8 +175,9 @@ export default class Water extends Object3D {
 
   move = ({ dt, player, entity }) => {
     const offset = 11;
+    const movement = entity.speed * dt * 30;
 
-    entity.mesh.position.x += entity.speed;
+    entity.mesh.position.x += movement;
 
     if (entity.mesh.position.x > offset && entity.speed > 0) {
       entity.mesh.position.x = -offset;

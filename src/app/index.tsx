@@ -25,11 +25,12 @@ class Game extends Component {
   /// Reserve State for UI related updates...
   state = {
     ready: false,
+    wallet: null,
+    uniqueId: null,
     score: 0,
     viewKey: 0,
     gameState: State.Game.none,
     showSettings: false,
-    // gameState: State.Game.gameOver
   };
 
   transitionScreensValue = new Animated.Value(1);
@@ -41,19 +42,6 @@ class Game extends Component {
     if (this.engine && nextProps.character !== this.props.character) {
       this.engine._hero.setCharacter(nextProps.character);
     }
-    // if ((this.state.gameState === State.Game.playing || this.state.gameState === State.Game.paused) && nextProps.isPaused !== this.props.isPaused) {
-    //   this.setState({ gameState: nextProps.isPaused ? State.Game.paused : State.Game.playing })
-    // }
-    // if (nextProps.character.id !== this.props.character.id) {
-    //   (async () => {
-    //     this.world.remove(this._hero);
-    //     this._hero = this.hero.getNode(nextProps.character.id);
-    //     this.world.add(this._hero);
-    //     this._hero.position.set(0, groundLevel, startingRow);
-    //     this._hero.scale.set(1, 1, 1);
-    //     this.init();
-    //   })();
-    // }
   }
 
   transitionToGamePlayingState = () => {
@@ -140,7 +128,9 @@ class Game extends Component {
 
   UNSAFE_componentWillMount() {
     this.engine = new Engine();
-    // this.engine.hideShadows = this.hideShadows;
+
+    const scoreToUpload = this.state.score;
+
     this.engine.onUpdateScore = (position) => {
       if (this.state.score < position) {
         this.setState({ score: position });
@@ -155,8 +145,38 @@ class Game extends Component {
     this.engine.onGameReady = () => this.setState({ ready: true });
     this.engine.onGameEnded = () => {
       this.setState({ gameState: State.Game.gameOver });
-      // this.props.navigation.navigate('GameOver')
+
+      const payload = {
+        score: scoreToUpload,
+        cheating: false,
+        uniqueId: "PlayerName",
+        wallet: "TestWallet"
+      };
+
+      console.log("Submitting score...")
+    
+      // Send the POST request
+      fetch("https://localhost:8080/v1/score/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to send score");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Server response:", data);
+        })
+        .catch((error) => {
+          console.error("Error sending score:", error);
+        });
     };
+
     this.engine.setupGame(this.props.character);
     this.engine.init();
   }

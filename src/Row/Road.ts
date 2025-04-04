@@ -32,7 +32,7 @@ export default class Road extends Object3D {
 
     // Speeds: .01 through .08
     // Number of cars: 1 through 3
-    let speed = Math.random() * 0.08 + 0.02;
+    let speed = Math.random() * 0.15 + 0.02;
     let numCars = Math.floor(Math.random() * 2) + 1;
     let xDir = 1;
 
@@ -87,8 +87,7 @@ export default class Road extends Object3D {
   drive = ({ dt, player, car }) => {
     const { hitBy } = player;
     const offset = 11;
-
-    console.log(dt);
+    
     // Scale movement speed based on delta time (normalized to 30 FPS)
     const movement = car.speed * dt * 30;
 
