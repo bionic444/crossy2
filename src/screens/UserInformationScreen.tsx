@@ -162,14 +162,14 @@ class Settings extends Component {
               />
               <View style={{ flexDirection: "row", marginTop: 16 }}>
                 <Button
-                  source={Images.button.back}
+                  source={Images.button.exit}
                   imageStyle={{ width: 40, height: 32 }}
                   onPress={() =>
                     this.setState({ inputVisible: null, inputValue: "" })
                   }
                 />
                 <Button
-                  source={Images.button.play}
+                  source={Images.button.submit}
                   imageStyle={{ width: 40, height: 32, marginLeft: 8 }}
                   onPress={() => {
                     console.log(`${inputVisible} input:`, inputValue);
