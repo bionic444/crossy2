@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Share, StyleSheet, Text, View, TextInput  } from "react-native";
+import { Share, StyleSheet, Text, View, TextInput } from "react-native";
 
 import Button from "@/components/Button";
 import Characters from "@/Characters";
@@ -40,18 +40,19 @@ class Settings extends Component {
     inputVisible: null,
     inputValue: "",
   };
+
   dismiss = () => {
     this.props.goBack();
   };
 
   pickRandom = () => {
-    const { characters, currentIndex } = this.state;
-
+    const { characters } = this.state;
     const randomIndex = Math.floor(Math.random() * (characters.length - 1));
     const randomCharacter = characters[randomIndex];
     this.props.setCharacter(randomCharacter);
     this.dismiss();
   };
+
   share = () => {
     const { characters, currentIndex } = this.state;
     const character = characters[currentIndex].name;
@@ -64,21 +65,18 @@ class Settings extends Component {
       {
         dialogTitle: "Share Bouncy Bacon",
         excludedActivityTypes: [
-          "com.apple.UIKit.activity.AirDrop", // This speeds up showing the share sheet by a lot
-          "com.apple.UIKit.activity.AddToReadingList", // This is just lame :)
+          "com.apple.UIKit.activity.AirDrop",
+          "com.apple.UIKit.activity.AddToReadingList",
         ],
         tintColor: Colors.blue,
       }
     );
   };
 
-  _showResult = (result) => {
-
-  };
+  _showResult = (result) => {};
 
   select = () => {
     const { characters, currentIndex } = this.state;
-
     this.props.setCharacter(characters[currentIndex]);
     this.dismiss();
   };
@@ -99,11 +97,11 @@ class Settings extends Component {
         source: Images.button.purchase,
         imageStyle: imageStyle,
         onPress: () => this.setState({ inputVisible: "wallet", inputValue: "" }),
-      }
+      },
     ];
 
     return (
-        <View style={[styles.container, this.props.style]}>
+      <View style={[styles.container, this.props.style]}>
         <View
           style={{ flexDirection: "row", marginTop: 8, paddingHorizontal: 4 }}
         >
@@ -115,7 +113,7 @@ class Settings extends Component {
             }}
           />
         </View>
-  
+
         <View
           key="content"
           style={{
@@ -127,7 +125,7 @@ class Settings extends Component {
           }}
         >
           <View
-            key="content"
+            key="content-inner"
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
@@ -145,8 +143,10 @@ class Settings extends Component {
               />
             ))}
           </View>
-  
-          {inputVisible && (
+        </View>
+
+        {inputVisible && (
+          <View style={styles.overlay}>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>
                 {inputVisible === "wallet"
@@ -169,29 +169,24 @@ class Settings extends Component {
                   }
                 />
                 <Button
-                  source={Images.button.play} // Replace with appropriate "confirm" button if needed
+                  source={Images.button.play}
                   imageStyle={{ width: 40, height: 32, marginLeft: 8 }}
                   onPress={() => {
                     console.log(`${inputVisible} input:`, inputValue);
-                    // Do something with the input value here
+                    // Use the input value as needed
                     this.setState({ inputVisible: null, inputValue: "" });
                   }}
                 />
               </View>
             </View>
-          )}
-        </View>
-
-        {/* <Footer /> */}
+          </View>
+        )}
       </View>
     );
   }
 }
+
 export default Settings;
-// export default connect(
-//   state => ({}),
-//   {},
-// )(Settings);
 
 Settings.defaultProps = {
   coins: 0,
@@ -212,16 +207,34 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#34495e",
   },
-
-  inputBox: {
-    backgroundColor: "rgba(255,255,255,0.9)",
-    borderRadius: 10,
-    padding: 16,
-    margin: 16,
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.5)",
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 9,
   },
-
+  inputBox: {
+    position: "absolute",
+    top: "30%",
+    left: "10%",
+    right: "10%",
+    backgroundColor: "rgba(255,255,255,0.95)",
+    borderRadius: 10,
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    zIndex: 10,
+  },
   textInput: {
     borderColor: "#333",
     borderWidth: 1,
@@ -234,11 +247,9 @@ const styles = StyleSheet.create({
     color: "#000",
     marginTop: 8,
   },
-
   inputLabel: {
     fontFamily: "retro",
     fontSize: 14,
     color: "#222",
   },
-
 });
