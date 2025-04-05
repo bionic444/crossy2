@@ -238,6 +238,9 @@ class Game extends Component {
           onPlay={() => {
             this.updateWithGameState(State.Game.playing);
           }}
+          showSettings={() => {
+            this.setState({ showSettings: true });
+          }}
         />
       </View>
     );

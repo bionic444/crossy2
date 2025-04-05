@@ -11,6 +11,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Hand from "@/components/HandCTA";
+import Footer from "@/components/Home/Footer";
 import GameContext from "@/context/GameContext";
 
 function Screen(props) {
@@ -116,6 +117,12 @@ function Screen(props) {
           <View style={{ height: 64, marginBottom: 48, alignItems: "center" }}>
             {!__DEV__ && <Hand style={{ width: 36 }} />}
           </View>
+
+          <Footer
+            onSettingSelect={() => {
+              props.showSettings();
+            }}
+          />
         </View>
       </TouchableOpacity>
     </View>
