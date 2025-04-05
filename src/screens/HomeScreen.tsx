@@ -13,15 +13,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Hand from "@/components/HandCTA";
 import GameContext from "@/context/GameContext";
 
-let hasShownTitle = false;
-
 function Screen(props) {
   const { setCharacter, character } = React.useContext(GameContext);
   const animation = new Animated.Value(0);
+  const [hasStarted, setHasStarted] = React.useState(false);
 
   React.useEffect(() => {
     function onKeyUp({ keyCode }) {
-      // Space, up-arrow
+      // Space or up-arrow
       if ([32, 38].includes(keyCode)) {
         props.onPlay();
       }
@@ -34,16 +33,12 @@ function Screen(props) {
   }, []);
 
   React.useEffect(() => {
-    if (!hasShownTitle) {
-      hasShownTitle = true;
-
       Animated.timing(animation, {
         useNativeDriver: process.env.EXPO_OS !== "web",
         toValue: 1,
         duration: 800,
         delay: 0,
       }).start();
-    }
   }, []);
 
   const { top, bottom, left, right } = useSafeAreaInsets();
@@ -64,7 +59,7 @@ function Screen(props) {
       },
     ],
   };
-  // console.log(props);
+
   return (
     <View
       style={[
@@ -98,10 +93,15 @@ function Screen(props) {
         }}
       >
         <Text style={styles.coins}>{props.coins}</Text>
+
         <Animated.Image
           source={require("../../assets/images/title.png")}
           style={[styles.title, animatedTitleStyle]}
         />
+
+        {(
+          <Text style={styles.startPrompt}>Click To Start!</Text>
+        )}
 
         <View
           style={{
@@ -132,10 +132,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   title: {
-    // color: 'white',
-    // fontSize: 48,
-    // backgroundColor: 'transparent',
-    // textAlign: 'center',
     resizeMode: "contain",
     maxWidth: 600,
     width: "80%",
@@ -154,6 +150,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     shadowOffset: { width: 0, height: 0 },
+  },
+  startPrompt: {
+    fontFamily: "retro",
+    fontSize: 20,
+    color: "white",
+    position: "absolute",
+    bottom: 32,
+    textAlign: "center",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   paragraph: {
     margin: 24,
