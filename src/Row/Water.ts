@@ -176,14 +176,19 @@ export default class Water extends Object3D {
   move = ({ dt, player, entity }) => {
     const offset = 11;
     const movement = entity.speed * dt * 30;
-
+  
     entity.mesh.position.x += movement;
-
+  
     if (entity.mesh.position.x > offset && entity.speed > 0) {
       entity.mesh.position.x = -offset;
     } else if (entity.mesh.position.x < -offset && entity.speed < 0) {
       entity.mesh.position.x = offset;
-    } else {
+    }
+
+    if (player.ridingOn === entity) {
+      player.position.x += entity.speed * dt * 30;
+  
+      player.position.x = entity.mesh.position.x + player.ridingOnOffset;
     }
   };
 
@@ -246,7 +251,7 @@ export default class Water extends Object3D {
   shouldCheckCollision = ({ player, entity }) => {
     if (Math.round(player.position.z) === this.position.z && player.isAlive) {
       const { mesh, collisionBox } = entity;
-
+  
       if (
         player.position.x < mesh.position.x + collisionBox &&
         player.position.x > mesh.position.x - collisionBox
