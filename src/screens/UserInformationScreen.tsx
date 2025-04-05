@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Share, StyleSheet, Text, View, TextInput } from "react-native";
+import { setCookie, getCookie, removeCookie } from "@/util/Cookies";
 
 import Button from "@/components/Button";
 import Characters from "@/Characters";
@@ -171,9 +172,15 @@ class Settings extends Component {
                 <Button
                   source={Images.button.submit}
                   imageStyle={{ width: 40, height: 32, marginLeft: 8 }}
-                  onPress={() => {
+                  onPress={async () => {
                     console.log(`${inputVisible} input:`, inputValue);
-                    // Use the input value as needed
+                    
+                    if (inputVisible === "wallet") {
+                      await setCookie("wallet", inputValue);
+                    } else {
+                      await setCookie("username", inputValue);
+                    }
+
                     this.setState({ inputVisible: null, inputValue: "" });
                   }}
                 />

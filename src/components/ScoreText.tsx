@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, Platform, View } from "react-native";
 import { useSafeArea } from "react-native-safe-area-context";
 import GameContext from "@/context/GameContext";
+import { setCookie, getCookie, removeCookie } from "@/util/Cookies";
 
 function generateTextShadow(width) {
   return Platform.select({
@@ -15,8 +16,19 @@ const textShadow = generateTextShadow(4);
 const textShadowHighscore = generateTextShadow(2);
 export default function Score({ gameOver, score, ...props }) {
   const { highscore = 0, setHighscore } = React.useContext(GameContext);
+  const [wallet, setWallet] = React.useState<string | null>(null);
+  const [username, setUsername] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+
+    const fetchCookies = async () => {
+      const wallet = await getCookie("wallet");
+      const username = await getCookie("username");
+      setWallet(wallet);
+      setUsername(username);
+    };
+    fetchCookies();
+
     if (gameOver) {
       if (score > highscore) {
         setHighscore(score);
@@ -41,8 +53,8 @@ export default function Score({ gameOver, score, ...props }) {
           BEST: {highscore}
         </Text>
       )}
-      <Text style={[styles.highscore, textShadowHighscore]}>Wallet: None</Text>
-      <Text style={[styles.highscore, textShadowHighscore]}>Playing As: User1234</Text>
+      <Text style={[styles.highscore, textShadowHighscore]}>Wallet: {wallet}</Text>
+      <Text style={[styles.highscore, textShadowHighscore]}>Name: {username}</Text>
     </View>
   );
 }
