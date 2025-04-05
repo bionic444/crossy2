@@ -143,7 +143,7 @@ export class CrossyWorld extends Group {
 
     this.featherParticles = new Feathers();
     this.add(this.featherParticles.mesh);
-  };
+  };  
 }
 
 export class CrossyRenderer extends Renderer {
@@ -152,8 +152,8 @@ export class CrossyRenderer extends Renderer {
     this.__gl = props.gl;
     this.setShadowsEnabled(useShadows);
 
-    this.toneMapping = THREE.NoToneMapping; // Or experiment with other mappings like LinearToneMapping
-    this.toneMappingExposure = 1; // Increase if the scene is too dim
+    this.toneMapping = THREE.ACESFilmicToneMapping // Or experiment with other mappings like LinearToneMapping
+    this.toneMappingExposure = 2; // Increase if the scene is too dim
   }
 
   setShadowsEnabled(enabled) {
