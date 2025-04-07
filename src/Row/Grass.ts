@@ -44,11 +44,11 @@ export default class Grass extends Object3D {
     let mesh;
     if (HAS_VARIETY) {
       mesh =
-        Math.random() < 0.4
-          ? ModelLoader._boulder.getRandom()
-          : ModelLoader._tree.getRandom();
+        //Math.random() < 0.4 ?
+         ModelLoader._boulder.getRandom()
+          //: ModelLoader._tree.getRandom();
     } else {
-      mesh = ModelLoader._tree.getRandom();
+      //mesh = ModelLoader._tree.getRandom();
     }
     this.obstacleMap[`${x | 0}`] = { index: this.entities.length };
     this.entities.push({ mesh });
