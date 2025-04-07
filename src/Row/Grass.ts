@@ -10,7 +10,7 @@ export const Fill = {
 };
 
 const HAS_WALLS = true;
-const HAS_OBSTACLES = true;
+const HAS_OBSTACLES = false;
 const HAS_VARIETY = true;
 
 export default class Grass extends Object3D {
