@@ -36,25 +36,46 @@ export default function Score({ gameOver, score, ...props }) {
     }
   }, [gameOver]);
 
-  const { top, left } = useSafeArea();
+  const { top, left, } = useSafeArea();
 
   return (
-    <View
-      pointerEvents="none"
-      style={[
-        styles.container,
-        { top: Math.max(top, 16), left: Math.max(left, 8) },
-      ]}
-    >
-
-      <Text style={[styles.score, textShadow]}>{score}</Text>
-      {highscore > 0 && (
+    <View style={StyleSheet.absoluteFill}>
+      {/* Game view fills screen */}
+      <View style={{ flex: 1 }}>{/* Render your game view here */}</View>
+  
+      {/* Top-left score & highscore */}
+      <View
+        pointerEvents="none"
+        style={[
+          styles.container,
+          { top: Math.max(top, 16), left: Math.max(left, 8), position: 'absolute' },
+        ]}
+      >
+        <Text style={[styles.score, textShadow]}>{score}</Text>
+        {highscore > 0 && (
+          <Text style={[styles.highscore, textShadowHighscore]}>
+            BEST: {highscore}
+          </Text>
+        )}
+      </View>
+  
+      {/* Top-right wallet & username */}
+      <View
+        pointerEvents="none"
+        style={{
+          position: 'absolute',
+          top: 16,
+          right: 8,
+          alignItems: 'flex-end',
+        }}
+      >
         <Text style={[styles.highscore, textShadowHighscore]}>
-          BEST: {highscore}
+          Wallet: {wallet ? wallet.slice(-6) : 'None'}
         </Text>
-      )}
-      <Text style={[styles.highscore, textShadowHighscore]}>Wallet: {wallet}</Text>
-      <Text style={[styles.highscore, textShadowHighscore]}>Name: {username}</Text>
+        <Text style={[styles.highscore, textShadowHighscore]}>
+          Name: {username}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -78,5 +99,11 @@ const styles = StyleSheet.create({
 
     letterSpacing: -0.1,
     backgroundColor: "transparent",
+  },
+  rightInfoContainer: {
+    position: 'absolute',
+    top: 16,
+    right: 8,
+    alignItems: 'flex-end',
   },
 });

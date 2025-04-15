@@ -88,7 +88,7 @@ class Settings extends Component {
 
     const buttons = [
       {
-        text: "User Identifier",
+        text: "Username",
         source: Images.button.language,
         imageStyle: imageStyle,
         onPress: () => this.setState({ inputVisible: "user", inputValue: "" }),
